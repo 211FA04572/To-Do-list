@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .task-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 50px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff6347;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-transform: capitalize;
+        }
+
+        #taskInputField {
+            padding: 15px;
+            width: calc(100% - 40px);
+            border: 2px solid #87cefa;
+            border-radius: 25px;
+            font-size: 18px;
+            outline: none;
+            background-color: #fdfd96;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #taskInputField::placeholder {
+            color: #888;
+        }
+
+        #taskAddButton {
+            padding: 15px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        #taskAddButton:hover {
+            background-color: #ff4500;
+            transform: translateY(-3px);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 30px 0 0;
+        }
+
+        .task-item {
+            background-color: #87cefa;
+            margin: 10px 0;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .task-item:hover {
+            background-color: #4682b4;
+            transform: scale(1.05);
+        }
+
+        .remove-task-btn {
+            background-color: #f08080;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-task-btn:hover {
+            background-color: #e57373;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task-container">
+        <h1>Task Manager</h1>
+        <input type="text" id="taskInputField" placeholder="Enter a task">
+        <button id="taskAddButton">Add Task</button>
+
+        <ul id="taskListContainer"></ul>
+    </div>
+
+    <script>
+        document.getElementById('taskAddButton').addEventListener('click', function() {
+            const taskInputField = document.getElementById('taskInputField');
+            const taskText = taskInputField.value.trim();
+
+            if (taskText) {
+                const taskListContainer = document.getElementById('taskListContainer');
+                const taskItem = document.createElement('li');
+                taskItem.textContent = taskText;
+                taskItem.className = 'task-item';
+                
+                const removeTaskButton = document.createElement('button');
+                removeTaskButton.textContent = 'Delete';
+                removeTaskButton.className = 'remove-task-btn';
+                
+                taskItem.appendChild(removeTaskButton);
+                taskListContainer.appendChild(taskItem);
+                
+                taskInputField.value = '';
+                
+                removeTaskButton.addEventListener('click', function() {
+                    taskListContainer.removeChild(taskItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
